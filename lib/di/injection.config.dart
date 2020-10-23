@@ -4,10 +4,13 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
+import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:structure_flutter/core/common/constants/app_constant.dart';
+import 'package:structure_flutter/core/common/utils/network_manager.dart';
+import 'package:structure_flutter/data/source/local/database/local_database.dart';
 import 'package:structure_flutter/data/source/remote/user_remote_datasource.dart';
 
 import '../bloc/blocs/user_bloc.dart';
@@ -28,7 +31,9 @@ GetIt $initGetIt(
   // Eager singletons must be registered in the right order
   gh.singleton<BuildConfig>(BuildConfig());
   gh.singleton<DioClient>(DioClient(AppConstant.BASE_URL, Dio()));
-  gh.singleton<UserRemoteDataSource>(UserRemoteDataSourceImpl(get<DioClient>()));
+  gh.singleton<LocalDatabase>(LocalDatabase());
+  gh.singleton<NetworkManager>(NetworkManager(Connectivity()));
+  gh.singleton<UserRemoteDataSource>(UserRemoteDataSourceImpl(get<DioClient>(), get<LocalDatabase>()));
   gh.singleton<UserRepository>(UserRepositoryImpl(get<UserRemoteDataSource>()));
   gh.singleton<UserGitBloc>(UserGitBloc());
   return get;
