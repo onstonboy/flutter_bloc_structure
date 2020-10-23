@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-part '../parser/user.g.dart';
+part '../parser/user_remote_entity.g.dart';
 
 @JsonSerializable()
 class UserGitEntity extends Equatable {
