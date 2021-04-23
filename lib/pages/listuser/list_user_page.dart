@@ -23,12 +23,12 @@ class ListUserPageState extends State<ListUserPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener((_onScroll));
-    _userGitBloc.dispatch(Fetch());
+    _userGitBloc.add(Fetch());
   }
 
   @override
   void dispose() {
-    _userGitBloc.dispose();
+    _userGitBloc.close();
     super.dispose();
   }
 
@@ -36,7 +36,7 @@ class ListUserPageState extends State<ListUserPage> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= _thresholdPixel) {
-      _userGitBloc.dispatch(Fetch());
+      _userGitBloc.add(Fetch());
     }
   }
 
@@ -49,9 +49,7 @@ class ListUserPageState extends State<ListUserPage> {
             Center(
               child: Text(
                 AppLocalization.of(context).translate('list_user'),
-                style: TextStyle(
-                  fontSize: 30
-                ),
+                style: TextStyle(fontSize: 30),
               ),
             ),
             Expanded(
@@ -132,8 +130,7 @@ class ListUserPageState extends State<ListUserPage> {
                 ),
               );
       },
-      itemCount:
-          state.hasReachMax ? state.users.length : state.users.length + 1,
+      itemCount: state.hasReachMax ? state.users.length : state.users.length + 1,
     );
   }
 }

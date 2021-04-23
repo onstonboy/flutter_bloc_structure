@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part '../parser/user_remote_entity.g.dart';
 
 @JsonSerializable()
@@ -13,8 +14,10 @@ class UserGitEntity extends Equatable {
 
   UserGitEntity({this.id, this.name, this.avatar});
 
-  factory UserGitEntity.fromJson(Map<String, dynamic> json) =>
-      _$UserGitFromJson(json);
+  factory UserGitEntity.fromJson(Map<String, dynamic> json) => _$UserGitFromJson(json);
+
+  @override
+  List<Object> get props => [id, name, avatar];
 
   Map<String, dynamic> toJson() => _$UserGitToJson(this);
 
