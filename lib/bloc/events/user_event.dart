@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-abstract class UserGitEvent extends Equatable {}
+abstract class UserGitEvent {}
 
 class Fetch extends UserGitEvent {
   @override

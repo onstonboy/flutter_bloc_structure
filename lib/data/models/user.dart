@@ -3,9 +3,9 @@ import 'package:structure_flutter/data/source/local/database/local_database.dart
 import 'package:structure_flutter/data/source/remote/api/entities/user_remote_entity.dart';
 
 class User extends Equatable {
-  int id;
-  String name;
-  String avatar;
+  final int id;
+  final String name;
+  final String avatar;
 
   User({
     this.id,
@@ -20,4 +20,7 @@ class User extends Equatable {
   factory User.copyWithLocal(UserDB userDB) {
     return User(id: userDB.id, name: userDB.name, avatar: userDB.avatar);
   }
+
+  @override
+  List<Object> get props => [id, name, avatar];
 }
